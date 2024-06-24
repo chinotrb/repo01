@@ -42,52 +42,40 @@ var btnCerrarPopup = document.getElementById('cerrarPopup');
 
 function mostrarPopup() {
   popup.style.display = 'block';
-  setTimeout(function() {
-      popup.style.top = '50px';
-  }, 10); // Delay para permitir que el navegador aplique los estilos antes de mostrar el popup
+  setTimeout(function () {
+    popup.style.top = '50px';
+  }, 10);
 }
 
-// Función para cerrar el popup
 function cerrarPopup() {
   popup.style.top = '0';
-  setTimeout(function() {
-      popup.style.display = 'none';
-  }, 350); // Retraso para que el popup se oculte después de la transición
+  setTimeout(function () {
+    popup.style.display = 'none';
+  }, 350);
 }
 
-// Agregar evento de clic al botón para mostrar el popup
 btnMostrarPopup.addEventListener('click', mostrarPopup);
 
-// Agregar evento de clic al botón de cerrar el popup
 btnCerrarPopup.addEventListener('click', cerrarPopup);
 
-// Obtener el modal
 var modal = document.getElementById("myModal");
 
-// Obtener el botón que cierra el modal
 var closeButton = document.getElementsByClassName("close-btn")[0];
 
-// Cuando se carga la página, abrir el modal
-window.onload = function() {
-    modal.style.display = "block";
+window.onload = function () {
+  modal.style.display = "block";
 }
-
-// Cuando el usuario hace clic en el botón, cerrar el modal
-closeButton.onclick = function() {
+closeButton.onclick = function () {
+  modal.style.display = "none";
+}
+window.onclick = function (event) {
+  if (event.target == modal) {
     modal.style.display = "none";
+  }
 }
-
-// Cuando el usuario hace clic en cualquier parte fuera del modal, cerrar el modal
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
+window.onload = function () {
+  if (!localStorage.getItem('hasVisited')) {
+    modal.style.display = "block";
+    localStorage.setItem('hasVisited', 'true');
+  }
 }
-/*
-  window.onload = function() {
-    if (!localStorage.getItem('hasVisited')) {
-        modal.style.display = "block";
-        localStorage.setItem('hasVisited', 'true');
-    }
-}
-    */
